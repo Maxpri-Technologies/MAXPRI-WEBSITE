@@ -1282,6 +1282,275 @@
                 font-size: 1.8rem;
             }
         }
+
+        /* =============================================
+           NEW ADDITIONS — visual refresh & features
+           ============================================= */
+
+        /* Mobile full-screen drawer (replaces broken toggle) */
+        .mobile-drawer {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(5, 5, 5, 0.98);
+            backdrop-filter: blur(18px);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        .mobile-drawer.open {
+            transform: translateX(0);
+        }
+        .mobile-drawer a {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.4s, transform 0.4s, color 0.2s;
+        }
+        .mobile-drawer.open a { opacity: 1; transform: translateY(0); }
+        .mobile-drawer.open a:nth-child(1) { transition-delay: 0.08s; }
+        .mobile-drawer.open a:nth-child(2) { transition-delay: 0.13s; }
+        .mobile-drawer.open a:nth-child(3) { transition-delay: 0.18s; }
+        .mobile-drawer.open a:nth-child(4) { transition-delay: 0.23s; }
+        .mobile-drawer.open a:nth-child(5) { transition-delay: 0.28s; }
+        .mobile-drawer a:hover { color: var(--secondary); }
+        @media (max-width: 768px) {
+            .mobile-drawer { display: flex; }
+            .mobile-menu span.ham-open-1, .mobile-menu span.ham-open-2, .mobile-menu span.ham-open-3 { }
+            .mobile-menu.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+            .mobile-menu.open span:nth-child(2) { opacity: 0; }
+            .mobile-menu.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        }
+
+        /* Stats Strip (new section) */
+        .stats-strip {
+            padding: 3.5rem 2rem;
+            background: var(--darker);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            text-align: center;
+        }
+        .stats-strip-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+        }
+        .stat-item { text-align: center; }
+        .stat-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+        .stat-label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Testimonials (new section) */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: var(--dark);
+            text-align: center;
+        }
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .testi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: left;
+            transition: all 0.3s;
+        }
+        .testi-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(59, 130, 246, 0.15);
+        }
+        .testi-stars { color: #fbbf24; font-size: 0.9rem; margin-bottom: 0.75rem; }
+        .testi-quote-mark {
+            font-size: 2.5rem;
+            line-height: 1;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+        }
+        .testi-text {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+        .testi-avatar {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; color: var(--white); font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .testi-name { font-weight: 600; color: var(--white); font-size: 0.9rem; }
+        .testi-role { color: var(--gray); font-size: 0.8rem; }
+
+        /* AI Chat Widget */
+        #chat-bubble {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 800;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.5);
+            transition: all 0.3s;
+            font-size: 1.5rem;
+        }
+        #chat-bubble:hover {
+            transform: scale(1.08);
+            box-shadow: 0 12px 32px rgba(59, 130, 246, 0.65);
+        }
+        #chat-panel {
+            position: fixed;
+            bottom: 5.5rem;
+            right: 2rem;
+            z-index: 800;
+            width: min(380px, calc(100vw - 2rem));
+            background: var(--card-bg);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            max-height: 520px;
+            transform: scale(0.9) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        #chat-panel.open {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+        .chat-header {
+            padding: 1rem 1.25rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.1));
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .chat-avatar {
+            width: 36px; height: 36px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0;
+        }
+        .chat-title { color: var(--white); font-size: 0.95rem; font-weight: 600; }
+        .chat-status { color: var(--secondary); font-size: 0.75rem; }
+        .chat-close-btn {
+            margin-left: auto;
+            cursor: pointer;
+            color: var(--gray);
+            font-size: 1.2rem;
+            background: none;
+            border: none;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+        .chat-close-btn:hover { color: var(--white); }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            max-height: 350px;
+        }
+        .chat-messages::-webkit-scrollbar { width: 4px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+        .chat-msg {
+            max-width: 85%;
+            padding: 0.7rem 1rem;
+            border-radius: 12px;
+            font-size: 0.88rem;
+            line-height: 1.6;
+        }
+        .chat-msg.bot {
+            align-self: flex-start;
+            background: var(--light-gray);
+            color: #e5e7eb;
+            border: 1px solid var(--border);
+            border-bottom-left-radius: 4px;
+        }
+        .chat-msg.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--white);
+            border-bottom-right-radius: 4px;
+        }
+        .chat-msg.typing { color: var(--gray); font-style: italic; }
+        .chat-input-row {
+            padding: 0.75rem 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 0.5rem;
+        }
+        .chat-input-row input {
+            flex: 1;
+            background: var(--dark);
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            padding: 0.6rem 0.9rem;
+            color: #e5e7eb;
+            font-size: 0.88rem;
+            font-family: inherit;
+            transition: border-color 0.25s;
+        }
+        .chat-input-row input:focus { outline: none; border-color: var(--primary); }
+        .chat-send-btn {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--white);
+            font-size: 0.9rem;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+        .chat-send-btn:hover { opacity: 0.85; }
+        .chat-send-btn:disabled { opacity: 0.4; cursor: not-allowed; }
     </style>
 </head>
 <body>
@@ -1314,6 +1583,15 @@
             </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-drawer" id="mobileDrawer">
+        <a href="#services" class="drawer-link">Services</a>
+        <a href="#process" class="drawer-link">Process</a>
+        <a href="#why-us" class="drawer-link">Why Us</a>
+        <a href="#order" class="drawer-link">Order App</a>
+        <a href="#contact" class="drawer-link">Contact</a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -1466,6 +1744,76 @@
                     <div class="feature-content">
                         <h3>Built to Scale</h3>
                         <p>Every application is engineered to handle growth and perform under increasing demand.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Strip (new) -->
+    <div class="stats-strip fade-in visible">
+        <div class="stats-strip-inner">
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Applications Shipped</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Service Tiers</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99%</div>
+                <div class="stat-label">Uptime Average</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2–12wk</div>
+                <div class="stat-label">Delivery Timeline</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials (new) -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header fade-in visible">
+                <h2>Trusted by Teams That Move Fast</h2>
+                <p>Engineering excellence meets practical business solutions</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testi-card fade-in visible">
+                    <div class="testi-stars">★★★★★</div>
+                    <div class="testi-quote-mark">"</div>
+                    <p class="testi-text">Maxpri delivered a system we couldn't have built in-house in twice the time. The architecture they designed has scaled seamlessly as our user base grew.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">JM</div>
+                        <div>
+                            <div class="testi-name">James Morrison</div>
+                            <div class="testi-role">CTO, FounderScale</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card fade-in visible">
+                    <div class="testi-stars">★★★★★</div>
+                    <div class="testi-quote-mark">"</div>
+                    <p class="testi-text">Our legacy platform was a nightmare. Maxpri modernized it without a single day of downtime. The codebase is night-and-day cleaner now.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">SL</div>
+                        <div>
+                            <div class="testi-name">Sara Lin</div>
+                            <div class="testi-role">Director of Engineering, Nexflow</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testi-card fade-in visible">
+                    <div class="testi-stars">★★★★★</div>
+                    <div class="testi-quote-mark">"</div>
+                    <p class="testi-text">The automation tooling Maxpri built saved us 30+ hours per week. It just works. Their team understood our workflow better than we explained it.</p>
+                    <div class="testi-author">
+                        <div class="testi-avatar">AK</div>
+                        <div>
+                            <div class="testi-name">Alex Kim</div>
+                            <div class="testi-role">Operations Lead, DataPilot</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1790,6 +2138,26 @@
         </div>
     </footer>
 
+    <!-- AI Chat Widget -->
+    <button id="chat-bubble" aria-label="Chat with Maxpri AI">🤖</button>
+    <div id="chat-panel">
+        <div class="chat-header">
+            <div class="chat-avatar">M</div>
+            <div>
+                <div class="chat-title">Maxpri Assistant</div>
+                <div class="chat-status">● Online — AI-powered</div>
+            </div>
+            <button class="chat-close-btn" onclick="toggleChat()">✕</button>
+        </div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-msg bot">👋 Hi! I'm the Maxpri AI assistant. Ask me anything about our services, pricing, or how we can help your project.</div>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="chatInput" placeholder="Ask anything about Maxpri…" onkeydown="if(event.key==='Enter')sendChat()" />
+            <button class="chat-send-btn" id="chatSendBtn" onclick="sendChat()">➤</button>
+        </div>
+    </div>
+
     <script>
         // ===== PARTICLE SYSTEM =====
         function createParticles() {
@@ -1950,12 +2318,21 @@
             this.reset();
         });
 
-        // ===== MOBILE MENU =====
+        // ===== MOBILE MENU (DRAWER) =====
         const mobileMenu = document.querySelector('.mobile-menu');
-        const navLinks = document.querySelector('.nav-links');
+        const mobileDrawer = document.getElementById('mobileDrawer');
 
         mobileMenu.addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            mobileMenu.classList.toggle('open');
+            mobileDrawer.classList.toggle('open');
+            document.body.style.overflow = mobileDrawer.classList.contains('open') ? 'hidden' : '';
+        });
+        document.querySelectorAll('.drawer-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileDrawer.classList.remove('open');
+                document.body.style.overflow = '';
+            });
         });
 
         // ===== ORDER FORM FUNCTIONS =====
@@ -2132,6 +2509,60 @@
                 closeModal();
             }
         });
-    </script>
+        // ===== AI CHAT WIDGET =====
+        let chatOpen = false;
+        const chatPanel = document.getElementById('chat-panel');
+        const chatMessages = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+
+        document.getElementById('chat-bubble').addEventListener('click', toggleChat);
+
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            chatPanel.classList.toggle('open', chatOpen);
+            if (chatOpen) chatInput.focus();
+        }
+
+        function addChatMsg(text, type) {
+            const d = document.createElement('div');
+            d.className = 'chat-msg ' + type;
+            d.textContent = text;
+            chatMessages.appendChild(d);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return d;
+        }
+
+        async function sendChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            chatInput.value = '';
+            chatSendBtn.disabled = true;
+            addChatMsg(text, 'user');
+            const typing = addChatMsg('Typing…', 'bot typing');
+            try {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        model: 'claude-sonnet-4-20250514',
+                        max_tokens: 1000,
+                        system: `You are the friendly, knowledgeable AI assistant for Maxpri Technologies — a software engineering company that designs, develops, and maintains scalable, high-performance applications.\n\nKey facts about Maxpri:\n- Services: Custom app development, system architecture, performance optimization, automation & tooling, legacy system modernization, maintenance & support\n- Packages: Starter ($170, 2-4 wk), Professional ($360, 6-12 wk), Enterprise ($550, custom timeline)\n- Maxpri Valley: An all-in-one AI workspace for business at valley.maxpri.workers.dev\n- Philosophy: Clean code, modular design, security-first, minimal technical debt, systems-first mindset\n- Contact: daniel.aronbabu.mailbox@gmail.com | +1 (555) 123-4567\n- Also runs a computer repair division as a client relationship channel\n\nBe concise, warm, and helpful. Keep answers under 3 sentences unless explaining a complex topic. Direct prospects to contact us or choose a package when appropriate.`,
+                        messages: [{ role: 'user', content: text }]
+                    })
+                });
+                const data = await res.json();
+                const reply = data.content?.find(b => b.type === 'text')?.text || 'Sorry, I couldn\'t get a response right now. Email us at daniel.aronbabu.mailbox@gmail.com!';
+                typing.remove();
+                addChatMsg(reply, 'bot');
+            } catch {
+                typing.remove();
+                addChatMsg('Connection issue. Email us at daniel.aronbabu.mailbox@gmail.com!', 'bot');
+            }
+            chatSendBtn.disabled = false;
+            chatInput.focus();
+        }
+
+</script>
 
 </body></html>
