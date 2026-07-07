@@ -201,8 +201,6 @@
     <div class="feat-grid" id="feat-grid"></div>
 
     <div class="summary">
-      <div class="sum-row"><span>30% deposit due now</span><span class="val" id="sum-dep">$0</span></div>
-      <div class="sum-row"><span>Remaining on completion</span><span id="sum-bal">$0</span></div>
       <div class="sum-row"><span>Estimated delivery</span><span id="sum-del">—</span></div>
       <div class="sum-row"><span>Total project cost</span><span class="val" id="sum-total">$0</span></div>
     </div>
@@ -246,40 +244,40 @@
          Replace each comment below with your PayPal button code.
          ═══════════════════════════════════════════════════════════ -->
     
-    <!-- ── TIER 0 · Starter · $550 total · $165 deposit ── -->
+    <!-- ── TIER 0 · Starter · $550 total ── -->
     <div class="pp-wrap">
       <div class="pp-label">Buy Starter</div>
       <div id="paypal-btn-starter" class="pay-actions">
         <form action="https://www.paypal.com/ncp/payment/A2NMS9YR33ZP6" method="post" target="_blank" class="pay-btn-form">
-          <button type="submit" class="pay-btn">Pay 30% deposit — Buy Starter</button>
+          <button type="submit" class="pay-btn">Pay $550 — Buy Starter</button>
         </form>
-        <div class="pay-meta">$165 deposit • $550 total</div>
+        <div class="pay-meta">$550 total</div>
       </div>
     </div>
 
-    <!-- ── TIER 1 · Professional · $720 total · $216 deposit ── -->
+    <!-- ── TIER 1 · Professional · $720 total ── -->
     <div class="pp-wrap">
       <div class="pp-label">Buy Professional</div>
       <div id="paypal-btn-professional" class="pay-actions">
         <form action="https://www.paypal.com/ncp/payment/386Z89WU58TBG" method="post" target="_blank" class="pay-btn-form">
-          <button type="submit" class="pay-btn">Pay 30% deposit — Buy Professional</button>
+          <button type="submit" class="pay-btn">Pay $720 — Buy Professional</button>
         </form>
-        <div class="pay-meta">$216 deposit • $720 total</div>
+        <div class="pay-meta">$720 total</div>
       </div>
     </div>
 
-    <!-- ── TIER 2 · Enterprise · $1,200 total · $360 deposit ── -->
+    <!-- ── TIER 2 · Enterprise · $1,200 total ── -->
     <div class="pp-wrap">
       <div class="pp-label">Buy Enterprise</div>
       <div id="paypal-btn-enterprise" class="pay-actions">
         <form action="https://www.paypal.com/ncp/payment/84LVPMU6PUBJC" method="post" target="_blank" class="pay-btn-form">
-          <button type="submit" class="pay-btn">Pay 30% deposit — Buy Enterprise</button>
+          <button type="submit" class="pay-btn">Pay $1,200 — Buy Enterprise</button>
         </form>
-        <div class="pay-meta">$360 deposit • $1,200 total</div>
+        <div class="pay-meta">$1,200 total</div>
       </div>
     </div>
 
-    <p class="secure-note">🔒 Secure checkout &nbsp;·&nbsp; 30% deposit to begin &nbsp;·&nbsp; remainder due on completion</p>
+    <p class="secure-note">🔒 Secure checkout</p>
   </div>
 
   <!-- Confirmation -->
@@ -331,9 +329,6 @@ function renderTier(idx) {
   const t = TIERS[idx];
   document.getElementById("tier-name").textContent = t.name;
   document.getElementById("price-num").textContent = t.price.toLocaleString();
-  const dep = Math.round(t.price * 0.3);
-  document.getElementById("sum-dep").textContent = fmt(dep);
-  document.getElementById("sum-bal").textContent = fmt(t.price - dep);
   document.getElementById("sum-del").textContent = t.delivery;
   document.getElementById("sum-total").textContent = fmt(t.price);
   const badge = document.getElementById("pop-badge");
@@ -363,9 +358,8 @@ renderTier(0);
 const PAYPAL_SLOTS = ["starter", "professional", "enterprise"];
 function updatePayPalSlot() {
   const tier = TIERS[curTier];
-  const dep  = Math.round(tier.price * 0.3);
   document.getElementById("pp-tier-badge").textContent =
-    tier.name + " — " + fmt(dep) + " deposit";
+    tier.name + " — " + fmt(tier.price) + " total";
   PAYPAL_SLOTS.forEach((slug, i) => {
     const slot = document.getElementById("paypal-btn-" + slug);
     if (slot) slot.style.display = (i === curTier) ? "flex" : "none";
@@ -395,7 +389,6 @@ function submitOrder() {
   errEl.classList.remove("show");
 
   const tier = TIERS[curTier];
-  const dep  = Math.round(tier.price * 0.3);
   const code = genCode();
 
   const templateParams = {
@@ -405,8 +398,6 @@ function submitOrder() {
     client_phone:  document.getElementById("phone").value.trim(),
     company:       document.getElementById("company").value.trim() || "N/A",
     package:       tier.name + " — " + fmt(tier.price),
-    deposit:       fmt(dep),
-    balance:       fmt(tier.price - dep),
     delivery:      tier.delivery,
     description:   document.getElementById("projectDesc").value.trim(),
     timeline:      document.getElementById("timeline").value,
