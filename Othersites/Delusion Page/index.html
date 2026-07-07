@@ -1,0 +1,1151 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Superiority</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #050505;
+      --panel: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.10);
+
+      --text: #f5f5f7;
+      --muted: #9fa3ad;
+
+      --accent: #e5e5e7;
+      --accent2: #8f8f95;
+
+      --glow: rgba(255,255,255,0.08);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top, #141414 0%, #050505 55%),
+        linear-gradient(to bottom, #050505, #090909);
+
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+
+      background-image:
+        radial-gradient(rgba(255,255,255,0.025) 1px, transparent 1px);
+
+      background-size: 4px 4px;
+
+      opacity: 0.15;
+      pointer-events: none;
+    }
+
+    .nav {
+      width: 100%;
+      padding: 24px 42px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      position: sticky;
+      top: 0;
+
+      backdrop-filter: blur(18px);
+
+      z-index: 100;
+
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+
+      background-image: url("logo.png");
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .hero {
+      max-width: 1400px;
+      margin: auto;
+
+      padding: 80px 40px 40px;
+    }
+
+    .hero-content {
+      max-width: 820px;
+      margin-bottom: 70px;
+    }
+
+    .hero h1 {
+      font-size: 82px;
+      line-height: 0.95;
+
+      letter-spacing: -0.06em;
+
+      margin-bottom: 28px;
+    }
+
+    .gradient {
+      background:
+        linear-gradient(
+          90deg,
+          #ffffff,
+          #d7d7db,
+          #8f8f95
+        );
+
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--muted);
+
+      font-size: 19px;
+      line-height: 1.8;
+
+      max-width: 720px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 18px;
+
+      margin-top: 36px;
+    }
+
+    .btn {
+      padding: 15px 24px;
+
+      border-radius: 16px;
+
+      border: 1px solid var(--border);
+
+      background: rgba(255,255,255,0.03);
+
+      color: white;
+
+      cursor: pointer;
+
+      transition: 0.3s ease;
+
+      font-weight: 600;
+
+      text-decoration: none;
+    }
+
+    .btn.primary {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #8f8f95
+        );
+
+      color: black;
+
+      border: none;
+
+      box-shadow:
+        0 0 30px rgba(255,255,255,0.08);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .browser {
+      width: 100%;
+
+      background: rgba(255,255,255,0.03);
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 34px;
+
+      overflow: hidden;
+
+      backdrop-filter: blur(30px);
+
+      box-shadow:
+        0 40px 100px rgba(0,0,0,0.55);
+    }
+
+    .browser-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 20px 24px;
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .chat-tabs {
+      display: flex;
+      gap: 12px;
+
+      overflow-x: auto;
+    }
+
+    .chat-tab {
+      padding: 10px 16px;
+
+      border-radius: 14px;
+
+      background: rgba(255,255,255,0.04);
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      white-space: nowrap;
+    }
+
+    .chat-tab.active {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.12),
+          rgba(255,255,255,0.05)
+        );
+
+      color: white;
+
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .browser-body {
+      padding: 26px;
+
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+
+      gap: 22px;
+    }
+
+    .panel {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.06),
+          rgba(255,255,255,0.02)
+        );
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 24px;
+
+      padding: 22px;
+
+      backdrop-filter: blur(30px);
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 20px 50px rgba(0,0,0,0.45);
+    }
+
+    .message {
+      background: rgba(255,255,255,0.03);
+
+      border-radius: 18px;
+
+      padding: 18px;
+
+      margin-bottom: 16px;
+
+      line-height: 1.8;
+
+      color: #d9dfeb;
+    }
+
+    .message.user {
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,0.08),
+          rgba(255,255,255,0.03)
+        );
+
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .section-title {
+      font-size: 14px;
+
+      color: var(--muted);
+
+      margin-bottom: 18px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.12em;
+    }
+
+    .comparison-card {
+      background: rgba(255,255,255,0.04);
+
+      border: 1px solid rgba(255,255,255,0.06);
+
+      border-radius: 20px;
+
+      padding: 18px;
+
+      margin-bottom: 14px;
+    }
+
+    .comparison-card h3 {
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .comparison-card p {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+    .search-bar {
+      margin-top: 22px;
+
+      display: flex;
+      gap: 14px;
+      align-items: center;
+
+      background: rgba(255,255,255,0.03);
+
+      border: 1px solid rgba(255,255,255,0.07);
+
+      border-radius: 18px;
+
+      padding: 18px;
+
+      color: var(--muted);
+    }
+
+    .search-dot {
+      width: 12px;
+      height: 12px;
+
+      border-radius: 50%;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #8f8f95
+        );
+
+      box-shadow:
+        0 0 20px rgba(255,255,255,0.25);
+    }
+
+    .cursor {
+      animation: blink 1s infinite;
+
+      color: #ffffff;
+
+      font-weight: 700;
+    }
+
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    .features {
+      max-width: 1400px;
+
+      margin: auto;
+
+      padding: 40px;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(auto-fit, minmax(260px, 1fr));
+
+      gap: 24px;
+    }
+
+    .feature {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.05),
+          rgba(255,255,255,0.02)
+        );
+
+      border: 1px solid rgba(255,255,255,0.06);
+
+      border-radius: 28px;
+
+      padding: 28px;
+
+      transition: 0.35s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-8px);
+
+      border-color: rgba(255,255,255,0.18);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .feature h2 {
+      margin-bottom: 14px;
+      font-size: 22px;
+    }
+
+    .feature p {
+      color: var(--muted);
+
+      line-height: 1.8;
+
+      font-size: 15px;
+    }
+
+    .comparison-section {
+      max-width: 1400px;
+
+      margin: auto;
+
+      padding: 100px 40px;
+    }
+
+    .comparison-section h2 {
+      font-size: 52px;
+
+      margin-bottom: 50px;
+
+      text-align: center;
+
+      letter-spacing: -0.05em;
+    }
+
+    .comparison-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      margin-bottom: 50px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 18px;
+
+      text-align: left;
+
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .comparison-table th {
+      font-weight: 700;
+
+      color: var(--text);
+
+      font-size: 15px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.08em;
+    }
+
+    .comparison-table td {
+      color: var(--muted);
+
+      font-size: 15px;
+    }
+
+    .comparison-table tr:hover {
+      background: rgba(255,255,255,0.02);
+    }
+
+    .check {
+      color: #4ade80;
+
+      font-weight: 700;
+    }
+
+    .x {
+      color: #ef4444;
+
+      font-weight: 700;
+    }
+
+    .pricing-section {
+      max-width: 1200px;
+
+      margin: auto;
+
+      padding: 100px 40px;
+    }
+
+    .pricing-section h2 {
+      font-size: 52px;
+
+      margin-bottom: 50px;
+
+      text-align: center;
+
+      letter-spacing: -0.05em;
+    }
+
+    .pricing-grid {
+      display: grid;
+
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+      gap: 30px;
+
+      margin-bottom: 50px;
+    }
+
+    .pricing-card {
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,0.06),
+          rgba(255,255,255,0.02)
+        );
+
+      border: 1px solid rgba(255,255,255,0.08);
+
+      border-radius: 28px;
+
+      padding: 40px;
+
+      transition: 0.35s ease;
+
+      display: flex;
+
+      flex-direction: column;
+    }
+
+    .pricing-card.featured {
+      border: 2px solid rgba(255,255,255,0.20);
+
+      transform: scale(1.05);
+
+      box-shadow:
+        0 20px 60px rgba(0,0,0,0.45);
+    }
+
+    .pricing-card:hover {
+      border-color: rgba(255,255,255,0.15);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .pricing-card h3 {
+      font-size: 24px;
+
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .subtitle {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      margin-bottom: 24px;
+    }
+
+    .pricing-card .price {
+      font-size: 42px;
+
+      font-weight: 700;
+
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .billing-period {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      margin-bottom: 32px;
+    }
+
+    .pricing-card .features-list {
+      flex-grow: 1;
+
+      margin-bottom: 32px;
+    }
+
+    .pricing-card .features-list p {
+      color: var(--muted);
+
+      font-size: 15px;
+
+      line-height: 2;
+
+      margin-bottom: 8px;
+    }
+
+    .pricing-card .btn {
+      text-align: center;
+
+      cursor: pointer;
+
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .pricing-card.featured .btn.primary {
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #8f8f95
+        );
+
+      color: black;
+
+      border: none;
+    }
+
+    .bio {
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 100px 40px;
+    }
+
+    .bio h2 {
+      font-size: 56px;
+
+      margin-bottom: 26px;
+
+      letter-spacing: -0.05em;
+    }
+
+    .bio p {
+      color: var(--muted);
+
+      font-size: 18px;
+
+      line-height: 1.9;
+
+      margin-bottom: 24px;
+    }
+
+    .credit {
+      max-width: 1100px;
+
+      margin: auto;
+
+      padding: 40px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 13px;
+
+      line-height: 1.8;
+    }
+
+    footer {
+      padding: 50px 40px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      border-top: 1px solid rgba(255,255,255,0.05);
+
+      margin-top: 40px;
+    }
+
+    @media(max-width: 1100px) {
+
+      .browser-body {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 58px;
+      }
+    }
+
+    @media(max-width: 700px) {
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero,
+      .features,
+      .bio {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="noise"></div>
+
+  <nav class="nav">
+
+    <div class="logo">
+      <div class="logo-icon"></div>
+      SUPERIORITY BROWSER
+    </div>
+
+    <div class="nav-links">
+      <span>Features</span>
+      <span>How It Works</span>
+      <span>About</span>
+      <span>Docs</span>
+    </div>
+
+  </nav>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        <span class="gradient">Intelligence</span><br>
+        Redefined for the<br>
+        Modern Web.
+      </h1>
+
+      <p>
+        Superiority Browser is a next-generation AI-native browser designed for researchers, professionals, and power users. Conversational search, real-time analysis, intelligent comparison tools, and live web insights in a unified interface—no tabs, no friction, just clarity.
+      </p>
+
+      <div class="hero-buttons">
+        <a id="requestAccessBtn" class="btn primary" href="#">Request Access</a>
+        <a class="btn" href="#bio">Learn More</a>
+      </div>
+
+    </div>
+
+    <div class="browser">
+
+      <div class="browser-top">
+
+        <div class="chat-tabs">
+          <div class="chat-tab active">GPU Comparison</div>
+          <div class="chat-tab">Best Violin Under $2k</div>
+          <div class="chat-tab">Mechanical Keyboards</div>
+        </div>
+
+      </div>
+
+      <div class="browser-body">
+
+        <div class="panel">
+
+          <div class="message user">
+            <span id="typing-query"></span><span class="cursor">|</span>
+          </div>
+
+          <div class="message">
+            <span id="typing-response"></span>
+          </div>
+
+          <div class="search-bar">
+            <div class="search-dot"></div>
+            Ask Superiority anything across the web...
+          </div>
+
+        </div>
+
+        <div>
+
+          <div class="panel" style="margin-bottom:20px;">
+
+            <div class="section-title">Live Sources</div>
+
+            <div class="comparison-card">
+              <h3>Retail Pricing</h3>
+              <p>
+                Live retailer pricing analysis and stock tracking.
+              </p>
+            </div>
+
+            <div class="comparison-card">
+              <h3>Benchmark Analysis</h3>
+              <p>
+                Real-time gaming, AI compute, and thermal comparisons.
+              </p>
+            </div>
+
+            <div class="comparison-card">
+              <h3>Community Sentiment</h3>
+              <p>
+                Aggregated expert reviews and discussion summaries.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="panel">
+
+            <div class="section-title">Superiority Capabilities</div>
+
+            <div class="comparison-card">
+              <p>• Conversational browsing</p>
+              <p>• AI-powered search</p>
+              <p>• Source retrieval</p>
+              <p>• Live web analysis</p>
+              <p>• Shopping comparisons</p>
+              <p>• Persistent AI sessions</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="features">
+
+    <div class="feature">
+      <h2>Conversational Search</h2>
+
+      <p>
+        Natural language queries that understand intent. Get answers with sources, not just links. Multi-turn conversations that build context over time.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h2>Real-Time Analysis</h2>
+
+      <p>
+        Live data feeds, benchmark results, pricing updates, and community sentiment—all analyzed and aggregated in seconds for informed decisions.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h2>Intelligent Comparison</h2>
+
+      <p>
+        Compare products, APIs, tools, hardware, and concepts side-by-side. Get recommendations tailored to your specific use case and priorities.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h2>Persistent Sessions</h2>
+
+      <p>
+        Unified AI conversations replace tab fragmentation. Your research context persists, enabling deeper analysis and smarter follow-up questions.
+      </p>
+    </div>
+
+  </section>
+
+  <section class="comparison-section">
+
+    <h2>Why Superiority Browser Stands Apart</h2>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Superiority Browser</th>
+          <th>Chrome</th>
+          <th>Safari</th>
+          <th>Firefox</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Conversational AI Search</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+        </tr>
+        <tr>
+          <td>Real-Time Web Analysis</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+        </tr>
+        <tr>
+          <td>Intelligent Comparisons</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+        </tr>
+        <tr>
+          <td>Persistent AI Sessions</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+        </tr>
+        <tr>
+          <td>Orgainized Interface</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="x">✗</span></td>
+        </tr>
+        <tr>
+          <td>Source Transparency</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Privacy Protection</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+        <tr>
+          <td>Cross-Platform Support</td>
+          <td><span class="check">✓</span></td>
+          <td><span class="check">✓</span></td>
+          <td><span class="x">✗</span></td>
+          <td><span class="check">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </section>
+
+  <section class="pricing-section">
+
+    <h2>Simple, Transparent Pricing</h2>
+
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <h3>Starter</h3>
+        <p class="subtitle">For casual researchers</p>
+        <p class="price">$5.00</p>
+        <p class="billing-period">/month, billed monthly</p>
+        <div class="features-list">
+          <p>✓ Up to 5 searches/day</p>
+          <p>✓ No conversational queries</p>
+          <p>✓ Limited real-time analysis</p>
+          <p>✓ Source citations included</p>
+          <p>✓ No Auth or Drive Search</p>
+          <p>✓ No AI Analysis</p>
+        </div>
+        <a class="btn" href="#">Get Notified</a>
+      </div>
+
+      <div class="pricing-card featured">
+        <h3>Pro</h3>
+        <p class="subtitle">For professionals & researchers</p>
+        <p class="price">$19.00</p>
+        <p class="billing-period">/month, billed monthly</p>
+        <div class="features-list">
+          <p>✓ Unlimited searches & sessions</p>
+          <p>✓ Advanced AI analysis</p>
+          <p>✓ Full real-time data feeds</p>
+          <p>✓ Priority API access</p>
+          <p>✓ Custom comparison templates</p>
+          <p>✓ Export & sharing tools</p>
+        </div>
+        <a class="btn primary" href="#" id="startFreeTrialBtn">Get Notified</a>
+      </div>
+
+      <div class="pricing-card">
+        <h3>Enterprise</h3>
+        <p class="subtitle">For teams & organizations</p>
+        <p class="price">Custom</p>
+        <p class="billing-period">Volume & usage-based</p>
+        <div class="features-list">
+          <p>✓ Dedicated infrastructure</p>
+          <p>✓ Team collaboration tools</p>
+          <p>✓ Advanced admin controls</p>
+          <p>✓ Custom integrations</p>
+          <p>✓ Priority support & SLA</p>
+        </div>
+        <a class="btn" href="mailto:maxpri.tech@gmail.com">Contact Sales</a>
+      </div>
+
+    </div>
+
+  </section>
+
+    <h2>The Future of Browsing</h2>
+
+    <p>
+      Superiority Browser represents a fundamental rethinking of how we interact with information online. Built from the ground up as an AI-native platform, it abandons the browser paradigm that defined the last thirty years and introduces a new model centered on intelligence, context, and clarity.
+    </p>
+
+    <p>
+      Rather than scrolling through search results or juggling tabs, users engage in goal-oriented conversations with an AI that understands their research intent. The browser actively retrieves sources, performs analysis, and synthesizes insights—all in real time, all with full transparency on where information comes from.
+    </p>
+
+    <p>
+      Whether you're evaluating products, researching technical decisions, conducting competitive analysis, or exploring complex topics, Superiority Browser accelerates your workflow and deepens your understanding. It's research, redefined.
+    </p>
+
+  </section>
+
+  <div class="credit">
+    <p>Built with <strong>Google AI Studio</strong> | Powered by advanced AI models for real-time web intelligence</p>
+  </div>
+
+  <footer>
+    SUPERIORITY BROWSER — THE INTELLIGENT INTERNET
+  </footer>
+
+  <script>
+
+    window.addEventListener("DOMContentLoaded", () => {
+
+      const queryElement =
+        document.getElementById("typing-query");
+
+      const responseElement =
+        document.getElementById("typing-response");
+
+      const queryText =
+        "Compare the RTX 5080 and RX 9800 XT for 4K gaming, AI workloads, thermals, and price-to-performance.";
+
+      const responseText =
+        "I searched benchmarks, pricing, expert reviews, and community discussions.<br><br>" +
+        "Recommendation:<br>" +
+        "• Gaming Focus → RX 9800 XT<br>" +
+        "• AI / Productivity → RTX 5080<br>" +
+        "• Balanced Overall → RTX 5080";
+
+      function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      async function typeHTML(element, html, speed = 25) {
+
+        let temp = document.createElement("div");
+        temp.innerHTML = html;
+
+        const text = temp.innerText;
+
+        element.innerHTML = "";
+
+        for (let i = 0; i < text.length; i++) {
+
+          let current = text
+            .substring(0, i + 1)
+            .replace(/\n/g, "<br>");
+
+          element.innerHTML = current;
+
+          await sleep(speed);
+        }
+      }
+
+      async function runDemo() {
+
+        while (true) {
+
+          queryElement.innerHTML = "";
+          responseElement.innerHTML = "";
+
+          await typeHTML(queryElement, queryText, 18);
+
+          await sleep(1200);
+
+          await typeHTML(responseElement, responseText, 12);
+
+          await sleep(5000);
+        }
+      }
+
+      const ADMIN_PASSWORD = "grumpyrabbit495";
+      const requestAccessBtn = document.getElementById("requestAccessBtn");
+
+      if (requestAccessBtn) {
+        requestAccessBtn.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          const promptMessage =
+            "This is not for the public yet.\n" +
+            "Request access at maxpri.tech@gmail.com.\n\n" +
+            "Enter the admin password:";
+
+          const password = window.prompt(promptMessage);
+
+          if (password === null) {
+            return;
+          }
+
+          if (password === ADMIN_PASSWORD) {
+            window.location.href = "https://project-beta-219426286741.us-east1.run.app/";
+          } else {
+            window.alert(
+              "Incorrect admin password. This is not for the public yet.\n" +
+              "Contact maxpri.tech@gmail.com for access."
+            );
+          }
+        });
+      }
+
+      runDemo();
+
+    });
+
+  </script>
+
+</body>
+</html>

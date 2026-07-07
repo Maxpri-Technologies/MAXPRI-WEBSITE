@@ -24,6 +24,14 @@
         })();
     </script>
     <meta charset="utf-8">
+    <script>
+        const requestUrl = window.location.href;
+        const requestHost = new URL(requestUrl).hostname;
+
+        if (requestHost.includes("workers.dev")) {
+            window.location.replace("https://maxpritech.com");
+        }
+    </script>
     <style>
         /* New Contact Details Section */
         .contact-info-section {
@@ -1966,7 +1974,7 @@
         </div>
     </section>
 
-    <!-- Delusion Section Preview Image -->
+    <!-- Superiority Section Preview Image -->
 <section style="padding: 0 2rem 4rem; background: var(--dark);">
     <div style="
         max-width: 1100px;
@@ -1977,8 +1985,8 @@
         box-shadow: 0 30px 80px rgba(0,0,0,0.5);
     ">
         <img
-            src="projectdelusion.svg"
-            alt="Project Delusion AI Web Browser"
+            src="projectsuperiority.svg"
+            alt="Project Superiority AI Web Browser"
             style="
                 width: 100%;
                 display: block;
@@ -1987,7 +1995,7 @@
         />
         <div style="text-align:center; padding: 2rem 0;">
     <a
-        href="https://delusion.maxpri.workers.dev"
+        href="https://superiority.maxpri.workers.dev"
         target="_blank"
         style="
             display:inline-block;
@@ -2004,7 +2012,7 @@
         onmouseover="this.style.transform='translateY(-3px)'"
         onmouseout="this.style.transform='translateY(0)'"
     >
-        Preview Delusion Browser →
+        Preview Superiority Browser →
     </a>
 </div>
     </div>
