@@ -97,38 +97,30 @@
         <li>Priority updates &amp; support</li>
       </ul>
 
-      <!--
-        ============================================================
-        PASTE YOUR PAYPAL SUBSCRIPTION BUTTON CODE BELOW.
-
-        This is a subscription (plan_id) button, so your snippet
-        should look roughly like:
-
-          <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription"></script>
-          <script>
-            paypal.Buttons({
-              style: { shape: 'pill', color: 'blue', layout: 'vertical', label: 'subscribe' },
-              createSubscription: function (data, actions) {
-                return actions.subscription.create({
-                  plan_id: 'YOUR_PLAN_ID'
-                });
-              },
-              onApprove: function (data, actions) {
-                // REQUIRED: hand the subscription ID to the real,
-                // server-verified unlock flow instead of unlocking
-                // directly in the browser.
-                handleSubscriptionApproved(data.subscriptionID);
-              }
-            }).render('#paypal-button-container');
-          </script>
-
-        Keep the client-id/plan_id from your own PayPal app — do not
-        reuse the placeholders above. The important part is calling
-        handleSubscriptionApproved(data.subscriptionID) from onApprove.
-        ============================================================
-      -->
+      
       <!-- PASTE PAYPAL BUTTON CODE HERE -->
       <div id="paypal-button-container"></div>
+      <div id="paypal-button-container-P-78D63219UC5478426NJUQYOA"></div>
+      <script src="https://www.paypal.com/sdk/js?client-id=BAAvq6dS3DmfEOwI1PhprdT25ueCqB5vSw0sEIGEImFm4W1iyE8ClrJxE08cVEgn711iIfepfTOwmbkgZQ&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
+      <script>
+        paypal.Buttons({
+            style: {
+                shape: 'pill',
+                color: 'gold',
+                layout: 'vertical',
+                label: 'subscribe'
+            },
+            createSubscription: function(data, actions) {
+              return actions.subscription.create({
+                /* Creates the subscription */
+                plan_id: 'P-78D63219UC5478426NJUQYOA'
+              });
+            },
+            onApprove: function(data, actions) {
+              alert(data.subscriptionID); // You can add optional success message for the subscriber here
+            }
+        }).render('#paypal-button-container-P-78D63219UC5478426NJUQYOA'); // Renders the PayPal button
+      </script>
       <!-- END PAYPAL BUTTON CODE -->
 
       <p class="payment-status" id="paymentStatus"></p>
