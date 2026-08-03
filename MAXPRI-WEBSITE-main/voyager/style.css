@@ -132,6 +132,24 @@ h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--accent-cyan); }
 .section { padding: 8rem 2rem; }
 .section-inner { max-width: 1200px; margin: 0 auto; }
 
+.cta-section {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 8rem 2rem;
+}
+
+.cta-section .cta-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cta-section .hero-actions {
+  justify-content: center;
+}
+
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
 
 .card { background: var(--bg-slate); padding: 3rem; border: 1px solid var(--border-subtle); border-radius: 8px; }
