@@ -29,10 +29,7 @@
 
     body {
       font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(79, 140, 255, 0.18), transparent 28%),
-        radial-gradient(circle at bottom right, rgba(255, 138, 61, 0.14), transparent 30%),
-        var(--bg);
+      background: linear-gradient(180deg, #070b15 0%, #0f172a 100%);
       color: var(--text);
       min-height: 100vh;
       padding: 24px;
@@ -53,11 +50,11 @@
       align-items: center;
       justify-content: space-between;
       padding: 18px 24px;
-      background: rgba(7, 12, 22, 0.82);
-      border: 1px solid var(--border);
+      background: rgba(12, 18, 33, 0.92);
+      border: 1px solid rgba(255,255,255,0.07);
       border-radius: 18px;
-      backdrop-filter: blur(16px);
-      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
       position: sticky;
       top: 16px;
       z-index: 20;
@@ -116,9 +113,9 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      background: #3b5bff;
       color: white;
-      box-shadow: 0 10px 25px rgba(79, 140, 255, 0.25);
+      box-shadow: 0 10px 20px rgba(59, 91, 255, 0.16);
     }
 
     .btn-secondary {
@@ -133,10 +130,10 @@
       gap: 24px;
       margin: 30px 0 28px;
       padding: 28px;
-      background: linear-gradient(145deg, rgba(10, 18, 32, 0.95), rgba(15, 24, 40, 0.9));
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 24px;
-      box-shadow: var(--shadow);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
     }
 
     .eyebrow {
@@ -174,8 +171,8 @@
     }
 
     .hero-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.03));
-      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
       padding: 20px;
       display: flex;
@@ -251,7 +248,7 @@
       padding: 18px;
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.08);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.025));
+      background: rgba(255,255,255,0.04);
       transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
@@ -288,34 +285,37 @@
 
     .product-highlight {
       margin-top: 18px;
-      padding: 16px 18px;
+      padding: 18px 20px;
       border-radius: 14px;
-      background: rgba(79, 140, 255, 0.08);
-      border: 1px solid rgba(79, 140, 255, 0.18);
-      color: #cfe0ff;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: var(--text);
       line-height: 1.7;
     }
 
-    .superiority-section {
+    .voyager-section {
       display: grid;
       grid-template-columns: 1.05fr 0.95fr;
       gap: 22px;
       align-items: center;
-      padding: 6px 0;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 22px;
     }
 
-    .superiority-copy {
+    .voyager-copy {
       display: flex;
       flex-direction: column;
       gap: 12px;
     }
 
-    .superiority-copy p {
+    .voyager-copy p {
       color: var(--muted);
       line-height: 1.75;
     }
 
-    .superiority-visual {
+    .voyager-visual {
       padding: 16px;
       border-radius: 20px;
       background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
@@ -323,7 +323,7 @@
       box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
     }
 
-    .superiority-visual img {
+    .voyager-visual img {
       display: block;
       width: 100%;
       height: auto;
@@ -425,13 +425,13 @@
     <main id="top">
       <section class="hero">
         <div>
-          <p class="eyebrow">Corporate product experience</p>
-          <h1>A polished digital operating layer for modern teams and everyday work.</h1>
+          <p class="eyebrow">Enterprise product experience</p>
+          <h1>A refined digital platform for modern teams and streamlined operations.</h1>
           <p>
-            MAXPRI brings together productivity, AI, collaboration, storage, and planning into a connected ecosystem built for business operations and personal organization alike.
+            MAXPRI unifies productivity, collaboration, secure storage, and planning into a cohesive platform designed for professional workflows and organizational performance.
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="https://valley.maxpri.workers.dev">Explore Valley</a>
+            <a class="btn btn-primary" href="https://maxpritech.com/voyager">Explore Voyager</a>
             <a class="btn btn-secondary" href="https://auth.maxpri.workers.dev">Access Platform</a>
           </div>
         </div>
@@ -455,25 +455,25 @@
             </div>
           </div>
           <div class="hero-card-footer">
-            Built for organizations that want structure, clarity, and a premium user experience across every workflow.
+            Built for organizations that need structure, clarity, and a premium user experience across every workflow.
           </div>
         </div>
       </section>
 
       <section class="section">
-        <div class="superiority-section">
-          <div class="superiority-copy">
+        <div class="voyager-section">
+          <div class="voyager-copy">
             <p class="eyebrow">Featured product</p>
-            <h2>Superiority brings a refined browser experience to the MAXPRI ecosystem.</h2>
+            <h2>Voyager brings a refined browser experience to the MAXPRI ecosystem.</h2>
             <p>
-              Designed as a polished, focused product showcase, Superiority offers an elegant way to explore content with clarity and intent.
+              Designed as a polished, focused product showcase, Voyager offers an elegant way to explore content with clarity and intent.
             </p>
-            <a class="explore-link" href="https://superiority.maxpri.workers.dev">
+            <a class="explore-link" href="https://voyager.maxpri.workers.dev">
               Explore <span aria-hidden="true">→</span>
             </a>
           </div>
-          <div class="superiority-visual">
-            <img src="projectsuperiority2.svg" alt="Superiority browser preview" />
+          <div class="voyager-visual">
+            <img src="projectsuperiority2.svg" alt="Voyager browser preview" />
           </div>
         </div>
       </section>
@@ -487,7 +487,7 @@
           </p>
         </div>
         <div class="product-highlight">
-          MAXPRI delivers a business-ready environment for knowledge management, AI assistance, secure file access, planning, and team coordination without the complexity of fragmented software.
+          MAXPRI delivers a business-ready environment for knowledge management, secure file access, planning, and team coordination without the complexity of fragmented software.
         </div>
       </section>
 
@@ -496,7 +496,7 @@
           <p class="eyebrow">Maxpri Valley</p>
           <h2>The business operating suite for teams and intelligent workflows.</h2>
           <p>
-            A modern environment for collaboration, knowledge, files, and AI-powered productivity across your organization.
+            A unified environment for collaboration, knowledge, files, and intelligent productivity across your organization.
           </p>
         </div>
         <div class="app-grid">
