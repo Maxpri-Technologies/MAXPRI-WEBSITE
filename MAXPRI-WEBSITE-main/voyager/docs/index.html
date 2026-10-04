@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Voyager v5 documentation: what's new, how to get started, use memory, and keep chats synced with your Google account." />
+  <meta name="theme-color" content="#090b10" />
+  <title>Voyager Docs — Version 5</title>
+  <link rel="icon" type="image/png" href="/voyager/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #090b10;
+      --surface: #10131b;
+      --surface-raised: #151923;
+      --line: rgba(220, 229, 255, 0.1);
+      --text: #f0f2f8;
+      --muted: #a0a8ba;
+      --subtle: #717b8f;
+      --blue: #66a9ff;
+      --cyan: #67e5d2;
+      --violet: #a591ff;
+      --font-display: "Space Grotesk", sans-serif;
+      --font-body: Inter, "Segoe UI", sans-serif;
+      --font-mono: "DM Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(ellipse at 68% -10%, rgba(70, 113, 196, 0.16), transparent 45%),
+        var(--page);
+      color: var(--text);
+      font: 15px/1.7 var(--font-body);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 5;
+      height: 68px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(9, 11, 16, 0.88);
+      backdrop-filter: blur(16px);
+    }
+    .topbar-inner {
+      width: min(1440px, 100%);
+      height: 100%;
+      margin: 0 auto;
+      padding: 0 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font: 700 1.08rem var(--font-display);
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: #081019;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      font-size: 16px;
+    }
+    .brand-divider { width: 1px; height: 24px; background: var(--line); }
+    .brand-docs { color: var(--muted); font: 500 0.9rem var(--font-body); }
+    .top-links { display: flex; align-items: center; gap: 24px; color: var(--muted); font-size: 0.88rem; }
+    .top-links a:hover, .sidebar a:hover { color: var(--text); }
+    .version-pill {
+      padding: 4px 9px;
+      border: 1px solid rgba(103, 229, 210, 0.25);
+      border-radius: 999px;
+      background: rgba(103, 229, 210, 0.08);
+      color: var(--cyan);
+      font: 500 0.72rem var(--font-mono);
+    }
+
+    .layout {
+      width: min(1440px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 248px minmax(0, 790px) 190px;
+      gap: 54px;
+      padding: 38px 34px 96px;
+    }
+    .sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      padding-right: 12px;
+      scrollbar-width: thin;
+      scrollbar-color: #303746 transparent;
+    }
+    .sidebar-group { margin-bottom: 30px; }
+    .sidebar-title {
+      margin: 0 0 10px;
+      color: var(--subtle);
+      font: 500 0.7rem var(--font-mono);
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+    .sidebar a {
+      display: block;
+      margin: 2px 0;
+      padding: 7px 10px;
+      border-left: 1px solid transparent;
+      border-radius: 0 6px 6px 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+      transition: color .15s ease, background .15s ease;
+    }
+    .sidebar a.active {
+      border-left-color: var(--cyan);
+      background: rgba(103, 229, 210, 0.07);
+      color: var(--cyan);
+    }
+    .sidebar .small-note {
+      margin: 8px 0 0 10px;
+      color: var(--subtle);
+      font-size: 0.76rem;
+    }
+
+    main { min-width: 0; }
+    .crumbs {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--subtle);
+      font: 0.76rem var(--font-mono);
+    }
+    .crumbs span:last-child { color: var(--muted); }
+    .intro { padding: 22px 0 34px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cyan);
+      font: 500 0.72rem var(--font-mono);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 13px rgba(103, 229, 210, .6);
+    }
+    h1, h2, h3 { font-family: var(--font-display); letter-spacing: -0.035em; }
+    h1 { margin: 12px 0 12px; font-size: clamp(2.45rem, 6vw, 3.65rem); line-height: 1.08; }
+    .intro > p { max-width: 710px; margin: 0; color: var(--muted); font-size: 1.04rem; }
+    .updated { margin-top: 18px; color: var(--subtle); font-size: 0.78rem; }
+    .updated span { color: var(--muted); }
+
+    .doc-section { padding: 38px 0 8px; scroll-margin-top: 90px; }
+    .doc-section h2 { margin: 0 0 10px; font-size: 1.8rem; line-height: 1.25; }
+    .doc-section > p { margin: 0 0 18px; color: var(--muted); }
+    .doc-section h3 { margin: 25px 0 8px; font-size: 1.12rem; }
+    .doc-section p + p { margin-top: 12px; }
+
+    .release-card {
+      position: relative;
+      overflow: hidden;
+      margin-top: 22px;
+      padding: 23px 25px;
+      border: 1px solid rgba(103, 229, 210, 0.2);
+      border-radius: 13px;
+      background: linear-gradient(120deg, rgba(25, 49, 61, 0.7), rgba(17, 22, 34, 0.88) 65%);
+    }
+    .release-card::after {
+      content: "V5";
+      position: absolute;
+      right: 18px;
+      top: -19px;
+      color: rgba(103, 229, 210, .075);
+      font: 700 6rem var(--font-display);
+      pointer-events: none;
+    }
+    .release-label { color: var(--cyan); font: 500 0.7rem var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
+    .release-card h3 { position: relative; margin: 7px 0 8px; font-size: 1.35rem; }
+    .release-card p { position: relative; max-width: 660px; margin: 0; color: var(--muted); }
+    .change-list { display: grid; gap: 12px; margin-top: 18px; }
+    .change-item {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 17px 18px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: rgba(16, 19, 27, .72);
+    }
+    .change-icon {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(102, 169, 255, .11);
+      color: var(--blue);
+      font-size: 1rem;
+    }
+    .change-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+    .change-item h3 { margin: 0 0 3px; font-size: 1rem; letter-spacing: -.015em; }
+    .change-item p { margin: 0; color: var(--muted); font-size: .89rem; }
+
+    .steps { counter-reset: step; display: grid; gap: 14px; margin: 20px 0; }
+    .step {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+    .step::before {
+      content: counter(step);
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(102, 169, 255, .28);
+      border-radius: 50%;
+      background: rgba(102, 169, 255, .08);
+      color: #9dc9ff;
+      font: 500 .8rem var(--font-mono);
+    }
+    .step h3 { margin: 1px 0 4px; font-size: 1rem; }
+    .step p { margin: 0; color: var(--muted); font-size: .9rem; }
+
+    .callout {
+      margin: 18px 0;
+      padding: 15px 17px;
+      border-left: 2px solid var(--violet);
+      border-radius: 0 8px 8px 0;
+      background: rgba(165, 145, 255, .07);
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .callout strong { color: var(--text); }
+    .callout.safe { border-left-color: var(--cyan); background: rgba(103, 229, 210, .06); }
+    .inline-link { color: #9dc9ff; text-decoration: underline; text-decoration-color: rgba(157, 201, 255, .35); text-underline-offset: 3px; }
+    .inline-link:hover { color: white; }
+    code, kbd {
+      padding: 2px 6px;
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: var(--surface-raised);
+      color: #c2d9ff;
+      font: .83em var(--font-mono);
+    }
+    .memory-example {
+      margin: 15px 0 18px;
+      padding: 14px 17px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #0d1017;
+      color: var(--muted);
+      font: .83rem/1.9 var(--font-mono);
+    }
+    .memory-example span { color: var(--cyan); }
+
+    .right-rail {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      padding-left: 16px;
+      border-left: 1px solid var(--line);
+    }
+    .right-rail strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--subtle);
+      font: 500 .68rem var(--font-mono);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .right-rail a { display: block; margin: 8px 0; color: var(--muted); font-size: .77rem; }
+    .right-rail a:hover { color: var(--text); }
+
+    .help-box {
+      margin-top: 42px;
+      padding: 21px 22px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: linear-gradient(110deg, rgba(25, 36, 54, .68), rgba(16, 19, 27, .75));
+    }
+    .help-box h2 { margin: 0 0 6px; font-size: 1.05rem; }
+    .help-box p { margin: 0 0 12px; color: var(--muted); font-size: .87rem; }
+    .help-box a { color: #9dc9ff; font-size: .85rem; }
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 22px 34px;
+      color: var(--subtle);
+      text-align: center;
+      font-size: .78rem;
+    }
+
+    @media (max-width: 1214px) {
+      .layout { grid-template-columns: 210px minmax(0, 790px); gap: 38px; }
+      .right-rail { display: none; }
+    }
+    @media (max-width: 760px) {
+      .topbar { height: auto; min-height: 62px; }
+      .topbar-inner { min-height: 62px; padding: 12px 18px; gap: 8px; }
+      .brand-docs { display: none; }
+      .top-links { gap: 8px; font-size: .76rem; }
+      .top-links a:first-child { display: none; }
+      .layout { display: block; padding: 26px 20px 70px; }
+      .sidebar { position: static; max-height: none; display: flex; gap: 8px; overflow: auto; margin: 0 -20px 25px; padding: 0 20px 8px; }
+      .sidebar-group { display: contents; }
+      .sidebar-title, .sidebar .small-note { display: none; }
+      .sidebar a { flex: 0 0 auto; margin: 0; padding: 7px 10px; border: 1px solid var(--line); border-radius: 999px; font-size: .77rem; }
+      .sidebar a.active { border-color: rgba(103, 229, 210, .3); }
+      .intro { padding-top: 18px; }
+      .doc-section { padding-top: 30px; }
+      footer { padding: 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="../" aria-label="Voyager home">
+        <span class="brand-mark" aria-hidden="true">↗</span>
+        <span>Voyager</span>
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="brand-docs">Documentation</span>
+      </a>
+      <nav class="top-links" aria-label="Top navigation">
+        <span class="version-pill">VERSION 5</span>
+        <a href="../">Voyager home</a>
+        <a href="mailto:maxpri.tech@gmail.com">Get help</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Documentation navigation">
+      <div class="sidebar-group">
+        <p class="sidebar-title">Getting started</p>
+        <a class="active" href="#whats-new">What's new in v5</a>
+        <a href="#install">Install Voyager</a>
+        <a href="#first-task">Run your first task</a>
+      </div>
+      <div class="sidebar-group">
+        <p class="sidebar-title">Features</p>
+        <a href="#memory">Using memory</a>
+        <a href="#saved-chats">Google-saved chats</a>
+        <a href="#dashboard-briefing">Dashboard briefing</a>
+        <a href="#smarter-agents">Smarter agents</a>
+      </div>
+      <div class="sidebar-group">
+        <p class="sidebar-title">Safety & support</p>
+        <a href="#safety">Safety and control</a>
+        <a href="#help">Get help</a>
+      </div>
+    </aside>
+
+    <main>
+      <div class="crumbs"><span>Docs</span><span>/</span><span>Voyager v5</span></div>
+      <header class="intro">
+        <span class="eyebrow">Voyager Browser Agent</span>
+        <h1>Voyager v5</h1>
+        <p>What's new, how to get started, and how to use memory and saved conversations. Give Voyager a goal in plain language, review its plan, and stay in control while it works in your browser.</p>
+        <div class="updated">Product guide <span>·</span> Version 5</div>
+      </header>
+
+      <section class="doc-section" id="whats-new">
+        <h2>What's new in v5</h2>
+        <p>Version 5 makes Voyager more useful across repeat tasks and ongoing work. Your preferences can carry forward, conversations can be tied to your Google account, and the agent is improved to plan and complete tasks more effectively.</p>
+        <div class="release-card">
+          <span class="release-label">Release highlights</span>
+          <h3>More continuity. Less repeated setup.</h3>
+          <p>Keep useful context between sessions, return to previous chats, and hand off multi-step browser work with clearer progress.</p>
+        </div>
+        <div class="change-list">
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">✦</div>
+            <div><h3>Memory for your preferences</h3><p>Save facts and preferences you choose, such as your preferred name or formatting style, and manage or clear them in the Memory panel.</p></div>
+          </article>
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">◷</div>
+            <div><h3>Chats saved with your Google account</h3><p>Sign in to keep conversations associated with your account, then return to saved chats from Voyager's chat list.</p></div>
+          </article>
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">↗</div>
+            <div><h3>Smarter, more efficient agents</h3><p>Voyager breaks goals into steps, reads the current page to choose relevant controls, and shows task progress as it works.</p></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="doc-section" id="install">
+        <h2>Install Voyager</h2>
+        <p>Voyager is currently installed manually in Chrome.</p>
+        <div class="steps">
+          <div class="step"><div><h3>Get the Voyager download</h3><p>Open the <a class="inline-link" href="/voyager/plans/">Voyager download page</a> and complete the subscription/download steps.</p></div></div>
+          <div class="step"><div><h3>Unzip the download</h3><p>Extract the downloaded ZIP file into a folder you can keep. Chrome loads the extracted folder, not the ZIP itself.</p></div></div>
+          <div class="step"><div><h3>Open Chrome extensions</h3><p>Navigate to <code>chrome://extensions</code> and turn on <strong>Developer mode</strong>.</p></div></div>
+          <div class="step"><div><h3>Load Voyager</h3><p>Select <strong>Load unpacked</strong> and choose the extracted extension folder. Pin Voyager from Chrome's extensions menu for easier access.</p></div></div>
+        </div>
+        <div class="callout"><strong>Keep the folder in place.</strong> If you move or delete the extracted folder, Chrome may no longer be able to load the extension.</div>
+      </section>
+
+      <section class="doc-section" id="first-task">
+        <h2>Run your first task</h2>
+        <p>Voyager works in the active Chrome session. Open the website you want it to use, then describe the outcome you want rather than scripting each click.</p>
+        <div class="steps">
+          <div class="step"><div><h3>Open the Voyager side panel</h3><p>Choose the Voyager extension icon in Chrome. If prompted, sign in with Google to use account-linked chat history.</p></div></div>
+          <div class="step"><div><h3>Open the relevant website</h3><p>Sign in to the site yourself and navigate to the page where you want Voyager to work.</p></div></div>
+          <div class="step"><div><h3>Describe one clear goal</h3><p>Enter your request in the task box. For example: “Compare these three plans and summarize the monthly price and cancellation terms.”</p></div></div>
+          <div class="step"><div><h3>Review and supervise</h3><p>Watch the task progress and read the activity log. Check the result when Voyager finishes; approve sensitive actions when asked.</p></div></div>
+        </div>
+        <div class="callout safe"><strong>Tip:</strong> Start with a specific, low-risk task. Include the desired output and any constraints, such as which fields to compare or what not to submit.</div>
+      </section>
+
+      <section class="doc-section" id="memory">
+        <h2>Use memory</h2>
+        <p>Memory is for information you intentionally want Voyager to remember about your preferences. It is optional; add only details you are comfortable saving.</p>
+        <div class="steps">
+          <div class="step"><div><h3>Open Memory</h3><p>In the Voyager side panel, expand <strong>Memory</strong> near the activity/log area.</p></div></div>
+          <div class="step"><div><h3>Add a label and value</h3><p>Enter a short label and the preference or fact to remember, then choose <strong>Save</strong>.</p></div></div>
+          <div class="step"><div><h3>Review or clear saved entries</h3><p>Return to the Memory panel to review saved items. Use <strong>Clear</strong> to remove memory when you no longer want Voyager to retain it.</p></div></div>
+        </div>
+        <div class="memory-example"><span>Example</span><br>Label: Preferred date format<br>Value: YYYY-MM-DD</div>
+        <div class="callout"><strong>Keep sensitive data out of memory.</strong> Do not save passwords, payment details, authentication codes, or other secrets.</div>
+      </section>
+
+      <section class="doc-section" id="saved-chats">
+        <h2>Save and return to chats</h2>
+        <p>Sign in with Google so Voyager can associate your conversations with your Google account. Your chats are then available from the chat list in the side panel.</p>
+        <div class="steps">
+          <div class="step"><div><h3>Sign in</h3><p>Choose <strong>Sign In</strong> in the Voyager panel and complete Google's sign-in flow.</p></div></div>
+          <div class="step"><div><h3>Start or continue a conversation</h3><p>Enter a task in the active conversation. Use the chat list to reopen a previous chat, or select <strong>New conversation</strong> to start fresh.</p></div></div>
+          <div class="step"><div><h3>Continue later</h3><p>After signing in again, choose the conversation from your chat list and continue with the context there.</p></div></div>
+        </div>
+        <div class="callout safe"><strong>Account access:</strong> Google sign-in is used for account-linked features. Only grant permissions you understand and want to use.</div>
+      </section>
+
+      <section class="doc-section" id="dashboard-briefing">
+        <h2>Get your dashboard briefing</h2>
+        <p>Voyager can prepare a concise dashboard report that combines your upcoming schedule with an inbox overview, so you can see what needs attention at a glance.</p>
+        <div class="change-list">
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2.5"></rect><path d="M7.5 3v4M16.5 3v4M3.5 9.5h17M8 13h.01M12 13h.01M16 13h.01M8 17h.01M12 17h.01"></path></svg>
+            </div>
+            <div><h3>This week and next</h3><p>Review the activities and calendar events scheduled for the current week and the following week.</p></div>
+          </article>
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"></rect><path d="m4 7 8 6 8-6"></path></svg>
+            </div>
+            <div><h3>Inbox overview</h3><p>See a short summary of your inbox, including the five emails Voyager identifies as most important to review.</p></div>
+          </article>
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 3.5h7l5 5V20a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 6 20V5a1.5 1.5 0 0 1 1-1.5Z"></path><path d="M14 3.5V9h5M9 13h6M9 16.5h6"></path></svg>
+            </div>
+            <div><h3>One report on your dashboard</h3><p>Use the briefing to spot upcoming commitments and prioritize email without opening each item individually.</p></div>
+          </article>
+        </div>
+        <div class="memory-example"><span>Try asking</span><br>“Prepare my dashboard briefing: summarize this week's and next week's activities, give me an inbox overview, and highlight the top five emails.”</div>
+        <div class="callout safe"><strong>Review before acting.</strong> The briefing is a summary to help you prioritize. Open the original calendar event or email to verify details before replying, changing plans, or taking action.</div>
+      </section>
+
+      <section class="doc-section" id="smarter-agents">
+        <h2>Get better results from the agent</h2>
+        <p>Clear goals help Voyager plan efficiently. Describe the outcome, scope, and limits; split unrelated work into separate tasks.</p>
+        <h3>A useful task prompt includes</h3>
+        <div class="change-list">
+          <article class="change-item"><div class="change-icon" aria-hidden="true">1</div><div><h3>The outcome</h3><p>Say what you want completed: find, compare, organize, or draft.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">2</div><div><h3>The scope</h3><p>Specify the pages, items, or number of results to include.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">3</div><div><h3>The boundaries</h3><p>Make it explicit when Voyager should not submit, purchase, delete, or send anything.</p></div></article>
+        </div>
+        <div class="memory-example"><span>Example</span><br>“Find 3 options under $100. Compare shipping and return policies.<br>Do not purchase anything.”</div>
+      </section>
+
+      <section class="doc-section" id="safety">
+        <h2>Safety and control</h2>
+        <p>Voyager operates in your browser, where pages may contain private account information. Keep an eye on the activity log and verify important results directly on the website.</p>
+        <div class="change-list">
+          <article class="change-item"><div class="change-icon" aria-hidden="true">✓</div><div><h3>Review sensitive actions</h3><p>Payments, sends, deletions, and other consequential actions should be reviewed and explicitly confirmed by you.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">Ⅱ</div><div><h3>Stop when needed</h3><p>Use the stop control in the side panel if the task is going in the wrong direction or you want to take over.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">◎</div><div><h3>Protect your information</h3><p>Do not include passwords or other secrets in a task prompt or saved memory. Sign out of accounts on shared devices.</p></div></article>
+        </div>
+      </section>
+
+      <section class="help-box" id="help">
+        <h2>Need a hand?</h2>
+        <p>For account, installation, or product support, contact the Maxpri team.</p>
+        <a href="mailto:maxpri.tech@gmail.com">Email maxpri.tech@gmail.com →</a>
+      </section>
+    </main>
+
+    <aside class="right-rail" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#whats-new">What's new in v5</a>
+      <a href="#install">Install Voyager</a>
+      <a href="#first-task">Run your first task</a>
+      <a href="#memory">Use memory</a>
+      <a href="#saved-chats">Save and return to chats</a>
+      <a href="#dashboard-briefing">Dashboard briefing</a>
+      <a href="#smarter-agents">Smarter agents</a>
+      <a href="#safety">Safety and control</a>
+    </aside>
+  </div>
+
+  <footer>Voyager documentation · A product by Maxpri Technologies</footer>
+</body>
+</html>
