@@ -1,7 +1,5 @@
 /* ---------- Hero stage: looping demo ---------- */
 (function(){
-  if (!document.getElementById('stage')) return;
-
   const fields = { f1:document.getElementById('f1'), f2:document.getElementById('f2'), f3:document.getElementById('f3'), f4:document.getElementById('f4') };
   const carets = { c1:document.getElementById('c1'), c2:document.getElementById('c2'), c3:document.getElementById('c3') };
   const cursor = document.getElementById('cursor');
