@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Voyager — The Agent That Works For You</title>
-<meta name="description" content="Voyager is an AI agent that drives your real browser — filling forms, researching, and finishing multi-step tasks while you do something else.">
+<title>Voyager 6.0 — Browses the Web. Builds in Your Files.</title>
+<meta name="description" content="Voyager 6.0 is an AI agent that drives your real browser and now writes code in your project folder — filling forms, researching, and shipping changes with your approval.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="shortcut icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,8 +18,10 @@
 
 <header class="nav">
   <div class="nav-inner">
-    <a class="brand" href="#top"><span class="brand-mark"></span> Voyager</a>
+    <a class="brand" href="#top"><span class="brand-mark"></span> Voyager <span class="ver">6.0</span></a>
     <nav class="nav-links">
+      <a href="#new">What's new</a>
+      <a href="#code">Code mode</a>
       <a href="#how">How it works</a>
       <a href="docs/">Docs</a>
       <a href="#uses">Use cases</a>
@@ -35,17 +37,17 @@
   <!-- HERO -->
   <section class="hero wrap">
     <div>
-      <p class="hero-status"><span class="blip"></span> Agent online — watching for your next task</p>
-      <h1>Your browser,<br>now <span class="accent">self-driving.</span></h1>
-      <p class="hero-lede">Voyager reads the page like you would, clicks what you'd click, and finishes multi-step web work in your real browser — logged in as you, while you go do something better with your afternoon.</p>
+      <p class="hero-status"><span class="blip"></span> Voyager 6.0 — now browses and builds</p>
+      <h1>Browses the web.<br><span class="accent">Builds in your files.</span></h1>
+      <p class="hero-lede">Voyager is no longer just a browser agent. It still drives your real browser — logged in as you — and now it also works as a coder inside a folder you choose: it reads your project, plans the change, and writes the files once you approve each one.</p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="plans/">Get Voyager</a>
-        <a class="btn btn-ghost" href="#demo">Watch it work</a>
+        <a class="btn btn-primary" href="plans/">Get Voyager 6.0</a>
+        <a class="btn btn-ghost" href="#new">See what's new</a>
       </div>
       <p class="hero-foot">
-        <span>Runs in Chrome</span><span class="sep">·</span>
+        <span>Chrome &amp; Edge</span><span class="sep">·</span>
         <span>Uses your existing logins</span><span class="sep">·</span>
-        <span>Confirms before anything risky</span><span class="sep">·</span>
+        <span>Review before every file write</span><span class="sep">·</span>
         <a href="https://github.com/Maxpri-Technologies/Voyager-Agentic-Browser/tree/main" target="_blank" rel="noopener">Source on GitHub</a>
       </p>
     </div>
@@ -53,9 +55,11 @@
     <div class="stage" id="stage" aria-hidden="true">
       <div class="stage-bar">
         <div class="stage-dots"><span></span><span></span><span></span></div>
-        <div class="stage-url"><span class="lock">🔒</span><span id="stageUrl">app.example.com/onboarding</span></div>
-        <div class="stage-tag">Voyager active</div>
+        <div class="stage-url"><span class="lock" id="stageLock">🔒</span><span id="stageUrl">app.example.com/onboarding</span></div>
+        <div class="stage-tag" id="stageTag">Agent mode</div>
       </div>
+
+      <!-- Agent mode scene -->
       <div class="stage-body" id="stageBody">
         <div class="stage-label" style="top:26px; left:24px;">Full name</div>
         <div class="stage-field" id="f1" style="top:44px; left:24px; width:260px; height:36px;">
@@ -76,6 +80,32 @@
 
         <div class="cursor-dot" id="cursor" style="top:120px; left:280px;"></div>
       </div>
+
+      <!-- Code mode scene -->
+      <div class="stage-body code-body" id="stageCode" hidden>
+        <div class="ct-tree">
+          <div class="ct-title">my-shop/</div>
+          <div class="ct-file">index.html</div>
+          <div class="ct-file">src/cart.js</div>
+          <div class="ct-file">src/prices.js</div>
+          <div class="ct-file">README.md</div>
+        </div>
+        <div class="ct-code">
+          <div class="ct-fn"><span>src/cart.js</span><em>proposed edit</em></div>
+          <div class="cl"><i> </i>function addToCart(item) {</div>
+          <div class="cl del"><i>-</i>  cart.push(item);</div>
+          <div class="cl add"><i>+</i>  const row = cart.find(r =&gt; r.id === item.id);</div>
+          <div class="cl add"><i>+</i>  if (row) row.qty += 1;</div>
+          <div class="cl add"><i>+</i>  else cart.push({ ...item, qty: 1 });</div>
+          <div class="cl"><i> </i>  save(cart);</div>
+          <div class="cl"><i> </i>}</div>
+        </div>
+        <div class="ct-review" id="ctReview">
+          <span id="ctReviewMsg">Write src/cart.js?</span>
+          <span class="ct-btns"><b class="go">Approve</b><b>Reject</b></span>
+        </div>
+      </div>
+
       <div class="stage-foot">
         <span id="stageStatus">Reading page structure…</span>
         <span>run_0417</span>
@@ -86,6 +116,119 @@
   <!-- LOG MARQUEE -->
   <section class="log-strip">
     <div class="log-track" id="logTrack"></div>
+  </section>
+
+  <!-- WHAT'S NEW IN 6.0 -->
+  <section class="v6 wrap" id="new">
+    <div class="section-head reveal">
+      <p class="section-tag"><span class="dot"></span> New in Voyager 6.0</p>
+      <h2>One agent. Two ways to work.</h2>
+      <p class="section-sub">Voyager started as a browser agent. Version 6.0 adds a second mode — and sharpens the first.</p>
+    </div>
+
+    <div class="v6-grid">
+      <div class="v6-card hl reveal">
+        <span class="badge new">NEW</span>
+        <h3>Code mode</h3>
+        <p>Connect a project folder and tell Voyager what to build or fix. It maps the folder, reads the files that matter, and proposes edits you approve one at a time.</p>
+        <a class="v6-link" href="#code">See how it works →</a>
+      </div>
+      <div class="v6-card reveal">
+        <span class="badge up">UPGRADED</span>
+        <h3>A smarter browser agent</h3>
+        <p>The agent loop was improved: dependent steps — click the search box, type, submit — now run as a batch before Voyager re-reads the page, so tasks finish with less back-and-forth.</p>
+        <a class="v6-link" href="#agent">See the new loop →</a>
+      </div>
+      <div class="v6-card reveal">
+        <span class="badge auto">AUTOMATIC</span>
+        <h3>It knows which mode you need</h3>
+        <p>Agent mode works in your active browser tab. Code mode works in your connected folder. Ask for a source-code change and Voyager switches modes for you.</p>
+      </div>
+    </div>
+
+    <div class="combo reveal">
+      <span class="chip agent">Agent mode · research the docs in your browser</span>
+      <span class="arrow">→</span>
+      <span class="chip code">Code mode · apply the change in your project</span>
+      <span class="arrow">→</span>
+      <span class="chip ok">You review and approve each file</span>
+    </div>
+  </section>
+
+  <!-- CODE MODE -->
+  <section class="codesec" id="code">
+    <div class="wrap code-split">
+      <div>
+        <div class="section-head reveal">
+          <p class="section-tag"><span class="dot"></span> Code mode</p>
+          <h2>It doesn't just browse. It builds.</h2>
+          <p class="section-sub">Give Voyager one folder and a goal. It works through your project the way a careful teammate would — look first, then propose, then wait for your yes.</p>
+        </div>
+        <ul class="check-list reveal">
+          <li><span class="tick">✓</span><span><b>You pick one folder.</b> Choose it from the + menu beside the microphone. Voyager works inside that folder and nothing else.</span></li>
+          <li><span class="tick">✓</span><span><b>Looks before it leaps.</b> It maps the folder structure first, then reads the files most likely to matter before it plans a change.</span></li>
+          <li><span class="tick">✓</span><span><b>Skips the noise.</b> Dependency and build folders like node_modules, dist, and .git are left alone.</span></li>
+          <li><span class="tick">✓</span><span><b>You approve every write.</b> Each file it creates or replaces pauses on a review dialog showing the exact path and proposed content.</span></li>
+          <li><span class="tick">✓</span><span><b>It never deletes files.</b></span></li>
+        </ul>
+      </div>
+
+      <div class="review-card reveal" aria-hidden="true">
+        <div class="rc-head"><span class="rc-path">Review change · src/cart.js</span><span class="rc-pill">replace file</span></div>
+        <div class="rc-body">
+          <div class="rl"><i> </i>function addToCart(item) {</div>
+          <div class="rl del"><i>-</i>  cart.push(item);</div>
+          <div class="rl add"><i>+</i>  const row = cart.find(r =&gt; r.id === item.id);</div>
+          <div class="rl add"><i>+</i>  if (row) row.qty += 1;</div>
+          <div class="rl add"><i>+</i>  else cart.push({ ...item, qty: 1 });</div>
+          <div class="rl"><i> </i>  save(cart);</div>
+          <div class="rl"><i> </i>}</div>
+        </div>
+        <div class="rc-foot"><span>Nothing is written until you approve.</span><span class="ct-btns"><b class="go">Approve</b><b>Reject</b></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SMARTER BROWSER AGENT -->
+  <section class="agentsec wrap" id="agent">
+    <div class="section-head reveal">
+      <p class="section-tag"><span class="dot"></span> Improved in 6.0</p>
+      <h2>A sharper browser agent</h2>
+      <p class="section-sub">The browsing algorithm was reworked so Voyager spends less time re-reading pages and more time finishing the job.</p>
+    </div>
+
+    <div class="lanes" id="lanes">
+      <div class="lane">
+        <div class="lane-label">Step-by-step loop</div>
+        <div class="lane-track">
+          <span class="act" style="--i:0">click search</span><span class="scan" style="--i:1">analyze</span><span class="act" style="--i:2">type</span><span class="scan" style="--i:3">analyze</span><span class="act" style="--i:4">submit</span><span class="scan" style="--i:5">analyze</span>
+        </div>
+      </div>
+      <div class="lane hl">
+        <div class="lane-label">Voyager 6.0 <em>batched</em></div>
+        <div class="lane-track">
+          <span class="act" style="--i:0">click search</span><span class="act" style="--i:1">type</span><span class="act" style="--i:2">submit</span><span class="scan" style="--i:3">analyze</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="int-grid algo-grid">
+      <div class="int-card reveal">
+        <span class="int-glyph">BATCH</span>
+        <h3>Dependent steps, together</h3>
+        <p>Actions that obviously belong together run as one batch, then Voyager re-analyzes the page — not after every single click.</p>
+      </div>
+      <div class="int-card reveal">
+        <span class="int-glyph">FIND</span>
+        <h3>Finds the right thing</h3>
+        <p>Object-finding workflows pick the item that matches what you asked for — then add it to the cart.</p>
+      </div>
+      <div class="int-card reveal">
+        <span class="int-glyph">VERIFY</span>
+        <h3>Checks its own work</h3>
+        <p>Looking for a flight? Voyager selects one and verifies it before the final booking step, which stays yours to confirm.</p>
+      </div>
+    </div>
   </section>
 
   <!-- FEATURES -->
@@ -117,7 +260,7 @@
         <div class="panel reveal">
           <div class="panel-glyph" style="background:rgba(107,230,176,0.12); color:var(--mint);">▤</div>
           <h3>Shows its work</h3>
-          <p>Every click and keystroke is logged in plain language, so you always know what it did, why, and what it's about to do next.</p>
+          <p>Every click, keystroke, and file it reads is tracked on a live task board in plain language, so you always know what it did, why, and what it's about to do next.</p>
         </div>
       </div>
     </div>
@@ -131,10 +274,10 @@
         <h2>Four steps, start to finish</h2>
       </div>
       <div class="wf-rail" id="wfRail">
-        <div class="wf-step reveal"><div class="wf-num">01</div><h3>Tell it the goal</h3><p>Type what you want done in plain language — no scripts, no config.</p></div>
-        <div class="wf-step reveal"><div class="wf-num">02</div><h3>It plans the route</h3><p>Voyager surveys the page and maps out the exact clicks and inputs it'll need.</p></div>
-        <div class="wf-step reveal"><div class="wf-num">03</div><h3>You approve the risky part</h3><p>Payments, deletions, and sends always pause for your explicit go-ahead.</p></div>
-        <div class="wf-step reveal"><div class="wf-num">04</div><h3>You get a summary</h3><p>A clear account of every action taken and the final state of the page.</p></div>
+        <div class="wf-step reveal"><div class="wf-num">01</div><h3>Tell it the goal</h3><p>Type what you want done in plain language — a web task or a code change. No scripts, no config.</p></div>
+        <div class="wf-step reveal"><div class="wf-num">02</div><h3>It plans the route</h3><p>Voyager surveys the page or your project folder and maps out the exact steps it'll need.</p></div>
+        <div class="wf-step reveal"><div class="wf-num">03</div><h3>You approve the risky part</h3><p>Payments, sends, and every file it writes pause for your explicit go-ahead.</p></div>
+        <div class="wf-step reveal"><div class="wf-num">04</div><h3>You get a summary</h3><p>A clear account of every action taken and the final state of the page or the files.</p></div>
       </div>
     </div>
   </section>
@@ -188,22 +331,43 @@
   <section class="uses wrap" id="uses">
     <div class="section-head reveal">
       <p class="section-tag"><span class="dot"></span> Put it to work</p>
-      <h2>The busywork it takes off your plate</h2>
+      <h2>From busywork to building</h2>
     </div>
     <div class="use-grid">
       <div class="use-card reveal">
+        <span class="use-kind agent">Agent mode</span>
         <h3>Lead generation</h3>
         <p>Point it at a directory or platform search and it opens every matching profile, pulling contact info, team size, and funding stage into one list.</p>
         <div class="use-tape"><span></span></div>
       </div>
       <div class="use-card reveal">
+        <span class="use-kind agent">Agent mode</span>
         <h3>Price comparison</h3>
         <p>Send it shopping across a handful of sites and it comes back with a straight comparison — same product, same specs, real prices.</p>
         <div class="use-tape"><span></span></div>
       </div>
       <div class="use-card reveal">
+        <span class="use-kind agent">Agent mode</span>
         <h3>Form-heavy admin</h3>
         <p>Procurement requests, repetitive submissions, multi-page sign-ups — the stuff you'd rather not do twice, Voyager does every time.</p>
+        <div class="use-tape"><span></span></div>
+      </div>
+      <div class="use-card reveal">
+        <span class="use-kind code">Code mode</span>
+        <h3>Fixes and refactors</h3>
+        <p>Point it at a project folder and describe the change. It reads the code first, then proposes the edits for your review.</p>
+        <div class="use-tape"><span></span></div>
+      </div>
+      <div class="use-card reveal">
+        <span class="use-kind code">Code mode</span>
+        <h3>New files and scaffolding</h3>
+        <p>Spin up components, scripts, and notes in your folder. Every new file is shown to you in full before it's written.</p>
+        <div class="use-tape"><span></span></div>
+      </div>
+      <div class="use-card reveal">
+        <span class="use-kind both">Both modes</span>
+        <h3>Research, then build</h3>
+        <p>Pull answers from the web in Agent mode, then apply them to your project in Code mode — all from the same side panel.</p>
         <div class="use-tape"><span></span></div>
       </div>
     </div>
@@ -223,6 +387,14 @@
       <div class="trust-card reveal">
         <h3>Human-in-the-loop, always</h3>
         <p>Voyager is a co-pilot, not an unsupervised script — it stops and asks before anything with real consequences.</p>
+      </div>
+      <div class="trust-card reveal">
+        <h3>One folder, nothing else</h3>
+        <p>Code mode only sees the single folder you connect, and you can disconnect it any time. Voyager asks for no extra system-wide filesystem permission. Files it reads are sent to the AI service to complete your task, so pick a folder you're comfortable sharing.</p>
+      </div>
+      <div class="trust-card reveal">
+        <h3>Every write is reviewed. No deletes.</h3>
+        <p>Creating or replacing a file always pauses on a review dialog with the exact path and content. Voyager never deletes files.</p>
       </div>
     </div>
   </section>
@@ -254,9 +426,9 @@
   <!-- CTA -->
   <section class="cta wrap">
     <div class="cta-inner reveal">
-      <h2>Stop clicking through the same task twice.</h2>
-      <p>Install Voyager and hand off the busywork today.</p>
-      <div class="hero-actions"><a class="btn btn-primary" href="plans/">Get Voyager</a></div>
+      <h2>Stop doing the busywork. Start shipping.</h2>
+      <p>Install Voyager 6.0 — it browses, it builds, and you stay in control.</p>
+      <div class="hero-actions"><a class="btn btn-primary" href="plans/">Get Voyager 6.0</a></div>
     </div>
   </section>
 
@@ -264,7 +436,7 @@
 
 <footer class="footer wrap">
   <div class="footer-inner">
-    <div class="brand"><span class="brand-mark"></span> Voyager</div>
+    <div class="brand"><span class="brand-mark"></span> Voyager <span class="ver">6.0</span></div>
     <p class="footer-note">A project by <a href="https://maxpritech.com">Maxpri Technologies</a></p>
   </div>
 </footer>

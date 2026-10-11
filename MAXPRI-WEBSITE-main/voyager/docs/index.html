@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Voyager v5 documentation: what's new, how to get started, use memory, and keep chats synced with your Google account." />
+  <meta name="description" content="Voyager 6.0 documentation: Code mode, the improved browser agent, how to get started, use memory, and keep chats synced with your Google account." />
   <meta name="theme-color" content="#090b10" />
-  <title>Voyager Docs — Version 5</title>
+  <title>Voyager Docs — Version 6.0</title>
   <link rel="icon" type="image/png" href="/voyager/favicon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -187,7 +187,7 @@
       background: linear-gradient(120deg, rgba(25, 49, 61, 0.7), rgba(17, 22, 34, 0.88) 65%);
     }
     .release-card::after {
-      content: "V5";
+      content: "V6";
       position: absolute;
       right: 18px;
       top: -19px;
@@ -358,7 +358,7 @@
         <span class="brand-docs">Documentation</span>
       </a>
       <nav class="top-links" aria-label="Top navigation">
-        <span class="version-pill">VERSION 5</span>
+        <span class="version-pill">VERSION 6.0</span>
         <a href="../">Voyager home</a>
         <a href="mailto:maxpri.tech@gmail.com">Get help</a>
       </nav>
@@ -369,12 +369,13 @@
     <aside class="sidebar" aria-label="Documentation navigation">
       <div class="sidebar-group">
         <p class="sidebar-title">Getting started</p>
-        <a class="active" href="#whats-new">What's new in v5</a>
+        <a class="active" href="#whats-new">What's new in 6.0</a>
         <a href="#install">Install Voyager</a>
         <a href="#first-task">Run your first task</a>
       </div>
       <div class="sidebar-group">
         <p class="sidebar-title">Features</p>
+        <a href="#code-mode">Code mode</a>
         <a href="#memory">Using memory</a>
         <a href="#saved-chats">Google-saved chats</a>
         <a href="#dashboard-briefing">Dashboard briefing</a>
@@ -388,23 +389,31 @@
     </aside>
 
     <main>
-      <div class="crumbs"><span>Docs</span><span>/</span><span>Voyager v5</span></div>
+      <div class="crumbs"><span>Docs</span><span>/</span><span>Voyager 6.0</span></div>
       <header class="intro">
-        <span class="eyebrow">Voyager Browser Agent</span>
-        <h1>Voyager v5</h1>
-        <p>What's new, how to get started, and how to use memory and saved conversations. Give Voyager a goal in plain language, review its plan, and stay in control while it works in your browser.</p>
-        <div class="updated">Product guide <span>·</span> Version 5</div>
+        <span class="eyebrow">Voyager Browser Agent + Coder</span>
+        <h1>Voyager 6.0</h1>
+        <p>What's new, how to get started, and how to use Code mode, memory, and saved conversations. Give Voyager a goal in plain language, review its plan, and stay in control while it works in your browser or in your project folder.</p>
+        <div class="updated">Product guide <span>·</span> Version 6.0</div>
       </header>
 
       <section class="doc-section" id="whats-new">
-        <h2>What's new in v5</h2>
-        <p>Version 5 makes Voyager more useful across repeat tasks and ongoing work. Your preferences can carry forward, conversations can be tied to your Google account, and the agent is improved to plan and complete tasks more effectively.</p>
+        <h2>What's new in 6.0</h2>
+        <p>Version 6.0 takes Voyager beyond the browser. It can now work as a coder in a folder on your computer, and the browser agent's algorithm has been improved. Memory and Google-saved chats from v5 carry forward.</p>
         <div class="release-card">
           <span class="release-label">Release highlights</span>
-          <h3>More continuity. Less repeated setup.</h3>
-          <p>Keep useful context between sessions, return to previous chats, and hand off multi-step browser work with clearer progress.</p>
+          <h3>Voyager now builds, not just browses.</h3>
+          <p>Switch between Agent mode for web tasks and Code mode for your project files, with a sharper browser agent and a review step before every file write.</p>
         </div>
         <div class="change-list">
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">{ }</div>
+            <div><h3>Code mode</h3><p>Connect a local folder and Voyager can read your project, plan a change, and write files after you approve each one. See <a class="inline-link" href="#code-mode">Use Code mode</a>.</p></div>
+          </article>
+          <article class="change-item">
+            <div class="change-icon" aria-hidden="true">↻</div>
+            <div><h3>Improved browser agent</h3><p>Dependent actions, such as clicking a search box, typing, and submitting, now run as a batch before Voyager re-reads the page. Object-finding workflows can pick a matching product and add it to the cart, or select and verify a flight before the final booking step.</p></div>
+          </article>
           <article class="change-item">
             <div class="change-icon" aria-hidden="true">✦</div>
             <div><h3>Memory for your preferences</h3><p>Save facts and preferences you choose, such as your preferred name or formatting style, and manage or clear them in the Memory panel.</p></div>
@@ -415,7 +424,7 @@
           </article>
           <article class="change-item">
             <div class="change-icon" aria-hidden="true">↗</div>
-            <div><h3>Smarter, more efficient agents</h3><p>Voyager breaks goals into steps, reads the current page to choose relevant controls, and shows task progress as it works.</p></div>
+            <div><h3>Live task board</h3><p>Voyager breaks goals into steps, reads the current page to choose relevant controls, and shows task progress as it works.</p></div>
           </article>
         </div>
       </section>
@@ -442,6 +451,26 @@
           <div class="step"><div><h3>Review and supervise</h3><p>Watch the task progress and read the activity log. Check the result when Voyager finishes; approve sensitive actions when asked.</p></div></div>
         </div>
         <div class="callout safe"><strong>Tip:</strong> Start with a specific, low-risk task. Include the desired output and any constraints, such as which fields to compare or what not to submit.</div>
+      </section>
+
+      <section class="doc-section" id="code-mode">
+        <h2>Use Code mode</h2>
+        <p>New in 6.0, Code mode lets Voyager work on files in a local folder you choose. It reads your project, plans a change, and writes files after you approve them. Agent mode still handles web tasks in your active browser tab; Code mode works in your connected folder.</p>
+        <div class="steps">
+          <div class="step"><div><h3>Connect a folder</h3><p>Open the <strong>+</strong> menu beside the microphone and choose your project folder. Voyager gets access to that folder only. You can reconnect or disconnect it from the same menu.</p></div></div>
+          <div class="step"><div><h3>Switch to Code mode</h3><p>Switch the side panel from Agent to Code. Voyager also switches automatically when you explicitly ask it to work in source code.</p></div></div>
+          <div class="step"><div><h3>Describe the change</h3><p>Say what you want built or fixed. File paths are relative to the connected folder.</p></div></div>
+          <div class="step"><div><h3>Review every write</h3><p>Each file Voyager creates or replaces pauses on a review dialog showing the exact path and proposed content. Approve or reject it before anything is written.</p></div></div>
+        </div>
+        <h3>How Voyager works through your project</h3>
+        <div class="change-list">
+          <article class="change-item"><div class="change-icon" aria-hidden="true">1</div><div><h3>It maps the folder first</h3><p>Voyager inventories the folder structure, up to 40 folders and 1,200 entries, before planning anything.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">2</div><div><h3>It reads before it edits</h3><p>It reads up to 10 likely project text files before planning, and up to 20 files in total as needed.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">3</div><div><h3>It skips the noise</h3><p>Generated and dependency folders such as <code>node_modules</code>, <code>dist</code>, and <code>.git</code> are skipped.</p></div></article>
+        </div>
+        <div class="memory-example"><span>Try asking</span><br>“Read my project notes and update the summary in README.md.”<br>“In src/cart.js, make adding an item that is already in the cart increase its quantity.”</div>
+        <div class="callout"><strong>Limits.</strong> Voyager can list, read, and write supported text files up to 50 KB. It never deletes files. Code mode needs a current version of Chrome or Edge with the File System Access API.</div>
+        <div class="callout safe"><strong>Privacy:</strong> Files Voyager reads are sent to the AI service used to complete your task, so connect only a folder, and ask about only material, you are comfortable sharing. Voyager requests no extension-wide filesystem permission.</div>
       </section>
 
       <section class="doc-section" id="memory">
@@ -496,7 +525,7 @@
 
       <section class="doc-section" id="smarter-agents">
         <h2>Get better results from the agent</h2>
-        <p>Clear goals help Voyager plan efficiently. Describe the outcome, scope, and limits; split unrelated work into separate tasks.</p>
+        <p>Clear goals help Voyager plan efficiently. Describe the outcome, scope, and limits; split unrelated work into separate tasks. In 6.0, Voyager also batches dependent actions, such as clicking a search box, typing, and submitting, before it re-reads the page, so multi-step interactions need fewer round trips.</p>
         <h3>A useful task prompt includes</h3>
         <div class="change-list">
           <article class="change-item"><div class="change-icon" aria-hidden="true">1</div><div><h3>The outcome</h3><p>Say what you want completed: find, compare, organize, or draft.</p></div></article>
@@ -510,7 +539,7 @@
         <h2>Safety and control</h2>
         <p>Voyager operates in your browser, where pages may contain private account information. Keep an eye on the activity log and verify important results directly on the website.</p>
         <div class="change-list">
-          <article class="change-item"><div class="change-icon" aria-hidden="true">✓</div><div><h3>Review sensitive actions</h3><p>Payments, sends, deletions, and other consequential actions should be reviewed and explicitly confirmed by you.</p></div></article>
+          <article class="change-item"><div class="change-icon" aria-hidden="true">✓</div><div><h3>Review sensitive actions</h3><p>Payments, sends, deletions, and other consequential actions should be reviewed and explicitly confirmed by you. In Code mode, every file Voyager creates or replaces is shown for your review first.</p></div></article>
           <article class="change-item"><div class="change-icon" aria-hidden="true">Ⅱ</div><div><h3>Stop when needed</h3><p>Use the stop control in the side panel if the task is going in the wrong direction or you want to take over.</p></div></article>
           <article class="change-item"><div class="change-icon" aria-hidden="true">◎</div><div><h3>Protect your information</h3><p>Do not include passwords or other secrets in a task prompt or saved memory. Sign out of accounts on shared devices.</p></div></article>
         </div>
@@ -525,9 +554,10 @@
 
     <aside class="right-rail" aria-label="On this page">
       <strong>On this page</strong>
-      <a href="#whats-new">What's new in v5</a>
+      <a href="#whats-new">What's new in 6.0</a>
       <a href="#install">Install Voyager</a>
       <a href="#first-task">Run your first task</a>
+      <a href="#code-mode">Use Code mode</a>
       <a href="#memory">Use memory</a>
       <a href="#saved-chats">Save and return to chats</a>
       <a href="#dashboard-briefing">Dashboard briefing</a>
