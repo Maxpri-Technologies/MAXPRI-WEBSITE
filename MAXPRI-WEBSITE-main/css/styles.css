@@ -243,6 +243,201 @@
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
         }
 
+        .product-hero {
+            padding: 7rem 2rem 6rem;
+            text-align: left;
+        }
+
+        .product-hero-layout {
+            width: min(1200px, 100%);
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .product-hero .hero-content {
+            max-width: none;
+            margin: 0;
+        }
+
+        .product-kicker {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-hero h1 {
+            font-size: clamp(2.7rem, 5.3vw, 4.6rem);
+            line-height: 1.08;
+        }
+
+        .product-hero .hero-content > p:not(.product-kicker) {
+            color: var(--gray);
+            max-width: 620px;
+            margin-bottom: 2rem;
+        }
+
+        .product-hero .cta-buttons {
+            justify-content: flex-start;
+        }
+
+        .product-hero-visual {
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--card-bg);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .product-hero-visual img {
+            width: 100%;
+            display: block;
+        }
+
+        .shipping-soon {
+            padding: 0 2rem 5rem;
+            background: var(--dark);
+        }
+
+        .shipping-soon-card {
+            border: 1px dashed rgba(6, 182, 212, 0.45);
+            border-radius: 16px;
+            padding: 2.5rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(6, 182, 212, 0.06));
+        }
+
+        .shipping-soon-card h2 {
+            color: var(--white);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .shipping-soon-card > p:not(.product-kicker) {
+            color: var(--gray);
+            margin: 0 auto 1rem;
+        }
+
+        .shipping-soon-link {
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .shipping-soon-link span {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .shipping-soon-link:hover span {
+            transform: translateX(4px);
+        }
+
+        .sprint-offer {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 2rem;
+            align-items: center;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+
+        .sprint-details h3 {
+            color: var(--white);
+            font-size: 1.7rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .sprint-details > p {
+            color: var(--gray);
+        }
+
+        .sprint-includes {
+            margin: 1.25rem 0;
+            padding-left: 1.25rem;
+            color: #d1d5db;
+        }
+
+        .sprint-includes li + li {
+            margin-top: 0.4rem;
+        }
+
+        .sprint-note {
+            font-size: 0.9rem;
+        }
+
+        .sprint-price {
+            min-width: 220px;
+            text-align: center;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--dark);
+        }
+
+        .sprint-price p {
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .sprint-price strong {
+            display: block;
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 900px) {
+            .product-hero-layout {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .product-hero .hero-content {
+                text-align: center;
+            }
+
+            .product-hero .cta-buttons {
+                justify-content: center;
+            }
+
+            .product-hero-visual {
+                max-width: 700px;
+                margin: 0 auto;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .product-hero {
+                padding-top: 5rem;
+            }
+
+            .product-hero h1 {
+                font-size: clamp(2.35rem, 10vw, 3.4rem);
+            }
+
+            .sprint-offer {
+                grid-template-columns: 1fr;
+                padding: 1.5rem;
+            }
+
+            .sprint-price {
+                min-width: 0;
+            }
+
+            .shipping-soon-card {
+                padding: 2rem 1.25rem;
+            }
+        }
+
         .btn {
             padding: 1rem 2.5rem;
             border: none;
