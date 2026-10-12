@@ -433,20 +433,19 @@
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
                         max_tokens: 1000,
-                        system: `You are the friendly, knowledgeable AI assistant for Maxpri Technologies — a software engineering company that designs, develops, and maintains scalable, high-performance applications.\n\nKey facts about Maxpri:\n- Services: Custom app development, system architecture, performance optimization, automation & tooling, legacy system modernization, maintenance & support\n- Packages: Starter ($170, 2-4 wk), Professional ($360, 6-12 wk), Enterprise ($800, custom timeline)\n- Maxpri Valley: An all-in-one AI workspace for business at valley.maxpri.workers.dev\n- Philosophy: Clean code, modular design, security-first, minimal technical debt, systems-first mindset\n- Contact: daniel.aronbabu.mailbox@gmail.com | +1 (555) 123-4567\n- Also runs a computer repair division as a client relationship channel\n\nBe concise, warm, and helpful. Keep answers under 3 sentences unless explaining a complex topic. Direct prospects to contact us or choose a package when appropriate.`,
+                        system: `You are the friendly, knowledgeable AI assistant for Maxpri Technologies.\n\nKey facts about Maxpri:\n- Voyager 6.0 is an AI agent for freelancers and small agencies that browses the web and proposes reviewed changes in a connected project folder.\n- Maxpri Valley is an AI workspace for teams, bringing writing, knowledge, files, and workflows together.\n- The custom build offer is one fixed-scope Startup MVP Sprint for $2,500: one core user journey, up to five responsive screens, a working web app, and a deploy-ready handoff. Third-party integrations and ongoing support are scoped separately.\n- Contact: maxpri.tech@gmail.com | +1 (330) 305-2588\n\nDo not describe retired service packages or invent delivery dates. Be concise, warm, and helpful. Keep answers under 3 sentences unless explaining a complex topic. Direct MVP prospects to contact us at maxpri.tech@gmail.com.`,
                         messages: [{ role: 'user', content: text }]
                     })
                 });
                 const data = await res.json();
-                const reply = data.content?.find(b => b.type === 'text')?.text || 'Sorry, I couldn\'t get a response right now. Email us at daniel.aronbabu.mailbox@gmail.com!';
+                const reply = data.content?.find(b => b.type === 'text')?.text || 'Sorry, I couldn\'t get a response right now. Email us at maxpri.tech@gmail.com!';
                 typingRow.remove();
                 addChatMsg(reply, 'bot');
             } catch {
                 typingRow.remove();
-                addChatMsg('Connection issue. Email us at daniel.aronbabu.mailbox@gmail.com!', 'bot');
+                addChatMsg('Connection issue. Email us at maxpri.tech@gmail.com!', 'bot');
             }
             chatSendBtn.disabled = false;
             chatInput.focus();
         }
         // ===== WE BUILD ANIMATION =====
-
